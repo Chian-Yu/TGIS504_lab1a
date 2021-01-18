@@ -31,7 +31,6 @@ function onLocationFound(e) {
           L.circle(e.latlng, radius, {color: 'red'}).addTo(map);
         }//this adds a circle to the map centered at the lat and long returned by the locate function. Its radius is set to the var radius defined above. green if it's accurate within 100 meters and red if it's less accurate 100 meters
 
-        var SunCalc = require('suncalc');
         var times = SunCalc.getTimes(new Date(), e.latitude, e.longitude);
         var sunrise = times.sunrise.getHours();
         var sunset = times.sunset.getHours();
