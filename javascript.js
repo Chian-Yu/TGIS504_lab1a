@@ -1,3 +1,5 @@
+alert("This web page will ask for your location!!! But it will not store or share your location information. Your location will use for maps to zoom into your place and identify your time zone. If your location is the day will use the light map and night will use the dark map.")
+
 var light = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2hpYW55dSIsImEiOiJja2hjcG5ubXUwMXZ4Mnp0OW93enk5Yjh2In0.PgRvkVtqOFh9ew6lp-BFuw', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -16,7 +18,16 @@ var dark = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?
 
 var map = L.map('map', {layers:[light]}).fitWorld();
 
-map.locate({setView: true, maxZoom: 16});
+var baseMaps = {
+  "Light": light,
+  "Dark": dark
+};
+
+L.control.layers(baseMaps).addTo(map);
+
+L.easyButton('<img src="location.png">', function(btn, map){
+    map.locate({setView: true, maxZoom: 16});
+}).addTo(map);
 
 function onLocationFound(e) {
     var radius = e.accuracy; //this defines a variable radius as the accuracy value returned by the locate method. The unit is meters.
