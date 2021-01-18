@@ -25,7 +25,7 @@ var baseMaps = {
 
 L.control.layers(baseMaps).addTo(map);
 
-L.easyButton('<img src="location.png">', function(btn, map){
+L.easyButton('fa-map-marker',  function(btn, map){
     map.locate({setView: true, maxZoom: 16});
 }).addTo(map);
 
